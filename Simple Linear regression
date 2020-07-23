@@ -1,0 +1,32 @@
+def new_data(X,Y):
+# defining a function with two features,
+# X= independent feature
+# Y= dependent feature
+
+# converting them to Series objects
+    x=pd.Series(X)
+    y=pd.Series(Y)
+    
+# selecting the means of the features
+    xbar = round( x.sum()/len(x)  ,2)
+    ybar= round(  y.sum()/ len(y)  ,2)
+
+# selecting the standard deviations of the features
+    sd_x = round( (sum((x-xbar)**2)/len(x))**0.5 , 2)
+    sd_y = round( (sum((y-ybar)**2)/len(y))**0.5 ,2)
+    
+# creating a dataframe with that fits the formula
+    data=pd.DataFrame({"X":x,"Y":y, "xmean":xbar,"ymean":ybar, "X-mean":x-xbar,"Y-mean":y-ybar,"(X-mean)^2":round((x-xbar)**2,2),
+                    "(X-mean)(Y-mean)":round((x-xbar)*(y-ybar),2)})
+    
+# slope of the line
+    slope =  round(data["(X-mean)(Y-mean)"].sum()/ data["(X-mean)^2"].sum() , 2)
+    
+# intercept of the line
+    intercept = round(ybar - (slope*xbar)  , 2)
+    
+# returning the line equation
+    print("Regression Line Equation", end ="   :  ")
+    print("y  = ",intercept,"+",slope,"*x")
+    
+  
